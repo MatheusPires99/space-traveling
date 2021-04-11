@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { getPrismicClient } from '../../services/prismic';
+import { getPrismicClient } from '../../services';
 
 interface Post {
   first_publication_date: string | null;

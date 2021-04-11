@@ -1,13 +1,14 @@
-import { render, screen } from '@testing-library/react';
 import {
   GetStaticPropsContext,
   GetStaticPathsContext,
   GetStaticPathsResult,
 } from 'next';
+import { useRouter } from 'next/router';
+
+import { render, screen } from '@testing-library/react';
 import { ParsedUrlQuery, parse } from 'querystring';
 
-import { useRouter } from 'next/router';
-import { getPrismicClient } from '../../services/prismic';
+import { getPrismicClient } from '../../services';
 import Post, { getStaticProps, getStaticPaths } from '../../pages/post/[slug]';
 
 interface Post {

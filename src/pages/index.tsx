@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { getPrismicClient } from '../services/prismic';
+import { getPrismicClient } from '../services';
 
 interface Post {
   uid?: string;
@@ -21,9 +21,9 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-// export default function Home() {
-//   // TODO
-// }
+export default function Home() {
+  return <h1>Hello World</h1>;
+}
 
 // export const getStaticProps = async () => {
 //   // const prismic = getPrismicClient();

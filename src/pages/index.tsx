@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { Header } from '../components';
+import { Header, PostsList, Wrapper } from '../components';
 import { getPrismicClient } from '../services';
 
 interface Post {
@@ -23,7 +23,15 @@ interface HomeProps {
 }
 
 export default function Home() {
-  return <Header />;
+  return (
+    <>
+      <Header />
+
+      <Wrapper>
+        <PostsList />
+      </Wrapper>
+    </>
+  );
 }
 
 // export const getStaticProps = async () => {

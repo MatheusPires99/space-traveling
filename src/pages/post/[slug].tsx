@@ -79,13 +79,13 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const postContent = data.content.map(content => {
     return {
-      heading: RichText.asText(content.heading),
+      heading: content.heading,
       body: RichText.asHtml(content.body),
     };
   });
 
   const post = {
-    title: RichText.asText(data.title),
+    title: data.title,
     banner: {
       url: data.banner.url,
       alt: data.banner.alt,

@@ -4,6 +4,7 @@ import { Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 
 import { PostInfo } from '../../PostInfo';
+import { formatDate } from '../../../utils';
 
 type PostLinkProps = {
   uid: string;
@@ -22,7 +23,7 @@ export function PostLink({
 }: PostLinkProps) {
   const infos = [
     {
-      text: createdAt,
+      text: formatDate(createdAt),
       icon: FiCalendar,
     },
     {

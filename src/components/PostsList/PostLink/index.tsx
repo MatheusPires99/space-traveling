@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 
-import { PostInfo } from '../PostInfo';
+import { PostInfo } from '../../PostInfo';
 
 type PostLinkProps = {
   uid: string;

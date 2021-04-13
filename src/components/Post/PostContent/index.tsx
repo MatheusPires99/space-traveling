@@ -2,8 +2,8 @@
 import { Box, Heading, Stack } from '@chakra-ui/react';
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 
-import { Wrapper } from '../Wrapper';
-import { PostInfo } from '../PostInfo';
+import { Wrapper } from '../../Wrapper';
+import { PostInfo } from '../../PostInfo';
 
 type PostContentProps = {
   title: string;

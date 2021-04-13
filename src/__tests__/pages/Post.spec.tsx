@@ -225,7 +225,7 @@ describe('Post', () => {
     const getStaticPathsContext: GetStaticPathsContext = {};
 
     const response = (await getStaticPaths(
-      getStaticPathsContext
+      getStaticPathsContext,
     )) as GetStaticPathsResult;
 
     expect(response.paths).toEqual(getStaticPathsReturn);
@@ -240,7 +240,7 @@ describe('Post', () => {
     };
 
     const response = (await getStaticProps(
-      getStaticPropsContext
+      getStaticPropsContext,
     )) as GetStaticPropsResult;
 
     expect(response.props.post).toEqual(postReturn);

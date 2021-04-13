@@ -51,7 +51,11 @@ export function PostContent({
               {c.heading}
             </Heading>
 
-            <Box dangerouslySetInnerHTML={{ __html: c.body }} />
+            <Box
+              className="post-body"
+              fontSize="lg"
+              dangerouslySetInnerHTML={{ __html: c.body }}
+            />
           </Box>
         ))}
       </Stack>

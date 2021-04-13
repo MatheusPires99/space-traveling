@@ -1,0 +1,15 @@
+.post-body {
+  margin-bottom: 48px;
+}
+
+.post-body p, .post-body ul {
+  margin: 24px 0;
+}
+
+.post-body ul {
+  padding-left: 24px;
+}
+
+.post-body ul li {
+  margin: 8px 0;
+}

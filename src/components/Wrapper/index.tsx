@@ -8,7 +8,7 @@ type WrapperProps = FlexProps & {
 
 export function Wrapper({ children, ...rest }: WrapperProps) {
   return (
-    <Flex w="100%" maxWidth={700} mx="auto" px="6" {...rest}>
+    <Flex w="100%" maxWidth={700} mx="auto" px="6" flexDir="column" {...rest}>
       {children}
     </Flex>
   );

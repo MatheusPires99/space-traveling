@@ -27,7 +27,7 @@ export function PostsList({ postsPagination }: PostsListProps) {
   }
 
   return (
-    <Wrapper flexDir="column">
+    <Wrapper as="main">
       <Stack spacing="12" mt="12">
         {posts.map(post => (
           <PostLink

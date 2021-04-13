@@ -1,15 +1,9 @@
 import Link from 'next/link';
 
-import {
-  Flex,
-  Heading,
-  Text,
-  Link as ChakraLink,
-  HStack,
-} from '@chakra-ui/react';
+import { Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 
-import { PostInfo } from './PostInfo';
+import { PostInfo } from '../PostInfo';
 
 type PostLinkProps = {
   uid: string;
@@ -26,6 +20,17 @@ export function PostLink({
   author,
   createdAt,
 }: PostLinkProps) {
+  const infos = [
+    {
+      text: createdAt,
+      icon: FiCalendar,
+    },
+    {
+      text: author,
+      icon: FiUser,
+    },
+  ];
+
   return (
     <Link href={`/post/${uid}`} passHref>
       <ChakraLink
@@ -47,12 +52,7 @@ export function PostLink({
 
         <Text fontSize="lg">{subtitle}</Text>
 
-        <Flex mt="6" align="center">
-          <HStack spacing="6">
-            <PostInfo icon={FiCalendar} content={createdAt} />
-            <PostInfo icon={FiUser} content={author} />
-          </HStack>
-        </Flex>
+        <PostInfo infos={infos} />
       </ChakraLink>
     </Link>
   );

@@ -2,12 +2,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Prismic from '@prismicio/client';
-import { RichText } from 'prismic-dom';
 import { Heading } from '@chakra-ui/react';
 
 import { Header, Post as PostComponent } from '../../components';
 import { getPrismicClient } from '../../services';
-import { formatDate } from '../../utils';
 
 export interface Post {
   first_publication_date: string | null;
@@ -15,12 +13,13 @@ export interface Post {
     title: string;
     banner: {
       url: string;
-      alt: string;
     };
     author: string;
     content: {
       heading: string;
-      body: string;
+      body: {
+        text: string;
+      }[];
     }[];
   };
 }
@@ -75,20 +74,20 @@ export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('post', String(slug), {});
 
-  const { data } = response;
+  const { uid, first_publication_date, data } = response;
 
   const postContent = data.content.map(content => {
     return {
       heading: content.heading,
-      body: RichText.asHtml(content.body),
+      body: content.body,
     };
   });
 
   const post = {
     title: data.title,
+    subtitle: data.subtitle,
     banner: {
       url: data.banner.url,
-      alt: data.banner.alt,
     },
     author: data.author,
     content: postContent,
@@ -97,8 +96,9 @@ export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
       post: {
+        uid,
         data: post,
-        first_publication_date: formatDate(response.first_publication_date),
+        first_publication_date,
       },
     },
     revalidate: 1000 * 60 * 30, // 30 minutes

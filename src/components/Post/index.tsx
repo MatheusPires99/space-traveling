@@ -11,7 +11,7 @@ type PostProps = {
 export function Post({ post }: PostProps) {
   return (
     <Flex as="main" flexDir="column">
-      <PostBanner src={post.data.banner.url} alt={post.data.banner.alt} />
+      <PostBanner src={post.data.banner.url} alt={post.data.title} />
 
       <PostContent
         title={post.data.title}

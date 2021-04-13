@@ -1,9 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import { Box, Heading, Stack } from '@chakra-ui/react';
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import { RichText } from 'prismic-dom';
 
 import { Wrapper } from '../../Wrapper';
 import { PostInfo } from '../../PostInfo';
+import { formatDate } from '../../../utils';
 
 type PostContentProps = {
   title: string;
@@ -11,7 +13,9 @@ type PostContentProps = {
   author: string;
   content: {
     heading: string;
-    body: string;
+    body: {
+      text: string;
+    }[];
   }[];
 };
 
@@ -24,7 +28,7 @@ export function PostContent({
   const infos = [
     {
       icon: FiCalendar,
-      text: createdAt,
+      text: formatDate(createdAt),
     },
     {
       icon: FiUser,
@@ -36,6 +40,13 @@ export function PostContent({
     },
   ];
 
+  const postContent = content.map(c => {
+    return {
+      heading: c.heading,
+      body: RichText.asHtml(c.body),
+    };
+  });
+
   return (
     <Wrapper my="20" align="flex-start">
       <Heading as="h1" color="gray.50" fontSize="5xl">
@@ -45,7 +56,7 @@ export function PostContent({
       <PostInfo infos={infos} />
 
       <Stack mt="16">
-        {content.map((c, index) => (
+        {postContent.map((c, index) => (
           <Box key={index}>
             <Heading as="h3" fontSize="4xl" color="gray.50" mb="12">
               {c.heading}

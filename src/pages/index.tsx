@@ -46,10 +46,12 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   );
 
-  const posts = formatPostsLists(response.results);
+  const { results, next_page } = response;
+
+  const posts = formatPostsLists(results);
 
   const postsPagination = {
-    next_page: response.next_page,
+    next_page,
     results: posts,
   };
 

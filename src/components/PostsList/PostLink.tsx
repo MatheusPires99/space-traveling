@@ -11,16 +11,23 @@ import { FiCalendar, FiUser } from 'react-icons/fi';
 
 import { PostInfo } from './PostInfo';
 
-type PostLink = {
+type PostLinkProps = {
+  uid: string;
   title: string;
   subtitle: string;
   author: string;
   createdAt: string;
 };
 
-export function PostLink() {
+export function PostLink({
+  uid,
+  title,
+  subtitle,
+  author,
+  createdAt,
+}: PostLinkProps) {
   return (
-    <Link href="" passHref>
+    <Link href={`post/${uid}`} passHref>
       <ChakraLink
         display="flex"
         flexDir="column"
@@ -35,17 +42,15 @@ export function PostLink() {
           transitionDuration="200ms"
           _groupHover={{ color: 'pink.400' }}
         >
-          Como utilizar Hooks
+          {title}
         </Heading>
 
-        <Text fontSize="lg">
-          Pensando em sincronização em vez de ciclos de vida.
-        </Text>
+        <Text fontSize="lg">{subtitle}</Text>
 
         <Flex mt="6" align="center">
           <HStack spacing="6">
-            <PostInfo icon={FiCalendar} content="19 Abr 2021" />
-            <PostInfo icon={FiUser} content="Joseph Oliveira" />
+            <PostInfo icon={FiCalendar} content={createdAt} />
+            <PostInfo icon={FiUser} content={author} />
           </HStack>
         </Flex>
       </ChakraLink>

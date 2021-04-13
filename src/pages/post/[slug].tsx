@@ -1,6 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 
+import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
+import { Heading } from '@chakra-ui/react';
 
 import { Header, Post as PostComponent } from '../../components';
 import { getPrismicClient } from '../../services';
@@ -27,6 +30,16 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return (
+      <Heading as="h1" color="gray.50">
+        Carregando...
+      </Heading>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -38,11 +51,21 @@ export default function Post({ post }: PostProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const prismic = getPrismicClient();
-  // const posts = await prismic.query(TODO);
+  const posts = await prismic.query([
+    Prismic.predicates.at('document.type', 'post'),
+  ]);
+
+  const paths = posts.results.map(post => {
+    return {
+      params: {
+        slug: post.uid,
+      },
+    };
+  });
 
   return {
-    paths: [],
-    fallback: 'blocking',
+    paths,
+    fallback: true,
   };
 };
 

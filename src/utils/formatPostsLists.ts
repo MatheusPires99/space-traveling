@@ -1,5 +1,4 @@
 import { Document } from '@prismicio/client/types/documents';
-import { RichText } from 'prismic-dom';
 
 import formatDate from './formatDate';
 
@@ -9,7 +8,7 @@ function formatPostsData(posts: Document[]) {
       uid: post.uid,
       first_publication_date: formatDate(post.first_publication_date),
       data: {
-        title: RichText.asText(post.data.title),
+        title: post.data.title,
         subtitle: post.data.subtitle,
         author: post.data.author,
       },

@@ -51,7 +51,7 @@ export function PostContent({
               {c.heading}
             </Heading>
 
-            <p dangerouslySetInnerHTML={{ __html: c.body }} />
+            <Box dangerouslySetInnerHTML={{ __html: c.body }} />
           </Box>
         ))}
       </Stack>

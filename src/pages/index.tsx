@@ -1,11 +1,10 @@
 import { GetStaticProps } from 'next';
 
 import Prismic from '@prismicio/client';
-import { RichText } from 'prismic-dom';
-import { format } from 'date-fns';
 
-import { Header, PostsList, Wrapper } from '../components';
+import { Header, PostsList } from '../components';
 import { getPrismicClient } from '../services';
+import { formatPostsLists } from '../utils';
 
 interface Post {
   uid?: string;
@@ -31,9 +30,7 @@ export default function Home({ postsPagination }: HomeProps) {
     <>
       <Header />
 
-      <Wrapper>
-        <PostsList postsPagination={postsPagination} />
-      </Wrapper>
+      <PostsList postsPagination={postsPagination} />
     </>
   );
 }
@@ -45,32 +42,14 @@ export const getStaticProps: GetStaticProps = async () => {
     [Prismic.predicates.at('document.type', 'post')],
     {
       fetch: ['post.title', 'post.subtitle', 'post.author'],
-      pageSize: 6,
+      pageSize: 1,
     },
   );
 
-  const posts = response.results.map(post => {
-    return {
-      uid: post.uid,
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        'dd MMM yyyy',
-      ),
-      data: {
-        title: RichText.asText(post.data.title),
-        subtitle: post.data.subtitle,
-        author: post.data.author,
-      },
-    };
-  });
-
-  const { page, results_per_page, total_results_size, next_page } = response;
+  const posts = formatPostsLists(response.results);
 
   const postsPagination = {
-    page,
-    results_per_page,
-    total_results_size,
-    next_page,
+    next_page: response.next_page,
     results: posts,
   };
 

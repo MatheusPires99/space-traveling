@@ -27,7 +27,7 @@ export function PostLink({
   createdAt,
 }: PostLinkProps) {
   return (
-    <Link href={`post/${uid}`} passHref>
+    <Link href={`/post/${uid}`} passHref>
       <ChakraLink
         display="flex"
         flexDir="column"
